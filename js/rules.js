@@ -32,6 +32,14 @@ const rules = {
         this.countBox[number] = sign;
     },
 
+    checkFull: function() {
+        for (i=0; i<this.countBox.length; i++) {
+            if (this.countBox[i] === '') {
+                return true
+            }
+        }
+    },
+
     winCheck: function(sign) {
 
         for (x=0; x<this.winArray.length; x++) {
@@ -42,19 +50,18 @@ const rules = {
                 
                 if (this.countBox[this.winArray[x][i]] === sign) {
 
-                    console.log(this.countBox[this.winArray[x][i]]);
                     count += 1;
 
                 }
             }
 
-            console.log(count);
-
             if (count === 3) {
-                console.log('WIN')
+                this.win = 1;
                 return true
             };
 
         }
-    }
+    },
+
+    win: 0
 }

@@ -1,14 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@100;400&family=Quicksand:wght@300;600&family=Raleway:wght@100;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nabla&family=Poppins:wght@100;400&family=Quicksand:wght@300;600&family=Raleway:wght@100;700&display=swap');
 
 /* font-family: 'Quicksand', sans-serif;
-font-family: 'Raleway', sans-serif; */
+font-family: 'Raleway', sans-serif; 
+font-family: 'Nabla', cursive;
+*/
+
+html {
+    background-color: #600082;
+}
 
 body {
+    background-color: white;
     align-content: center;
-    max-width: 960px;
+    max-width: 650px;
     margin: auto;
+    padding: 20px;
     font-family: 'Raleway', sans-serif;
     text-align: center;
+    line-height: 1.8;
+    color: #444;
+}
+
+h1 {
+    font-family: 'Nabla', cursive;
+    font-size: 100px;
+    margin: 0;
 }
 
 .container {
@@ -66,6 +82,7 @@ div > div {
     background-size: auto 150px;
     background-repeat: no-repeat;
     background-position: center;
+    transition: 1s;
 }
 
 .box.o {
@@ -73,4 +90,5 @@ div > div {
     background-size: auto 150px;
     background-repeat: no-repeat;
     background-position: center;
+    transition: 1s all;
 }

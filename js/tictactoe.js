@@ -13,7 +13,11 @@ $(document).ready(function() {
 
     let numClicks = 0;
 
+    let win = 0;
+
     $('.box').on('click', function() {
+
+        if (rules.win === 1) {return}
 
         const chosenBox = + $(this).attr('id').slice(3);
 
@@ -26,9 +30,10 @@ $(document).ready(function() {
             rules.addNum(sign, chosenBox);
             rules.winCheck(sign);
 
-            // if (rules.winCheck(sign)) {
-            //     console.log('Dog wins!');
-            // }
+            if (rules.winCheck(sign)) {
+                console.log('Dog wins!');
+                win = 1;
+            }
 
         } else {
 
@@ -37,14 +42,23 @@ $(document).ready(function() {
             rules.addNum(sign, chosenBox);
             rules.winCheck(sign);
 
-            // if (rules.winCheck(sign)) {
-            //     console.log('Cat wins!');
-            // }
+            if (rules.winCheck(sign)) {
+                console.log('Cat wins!');
+                win = 1;
+            }
         }
 
         numClicks++;
 
+        if (rules.checkFull() !== true) {
+            console.log("It's a draw!");
+        }
+
     });
+
+    const popup = function() {
+
+    }
 
 })
 
