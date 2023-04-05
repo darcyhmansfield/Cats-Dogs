@@ -13,11 +13,9 @@ $(document).ready(function() {
 
     let numClicks = 0;
 
-    let win = 0;
-
     $('.box').on('click', function() {
 
-        if (rules.win === 1) {return}
+        // if (rules.win === 1) {return}
 
         const chosenBox = + $(this).attr('id').slice(3);
 
@@ -31,8 +29,10 @@ $(document).ready(function() {
             rules.winCheck(sign);
 
             if (rules.winCheck(sign)) {
-                console.log('Dog wins!');
-                win = 1;
+                $('.modal h2').html('Dogs rule!');
+                rules.dogWins += 1;
+                $('#dog-wins').html(`Dogs: ${rules.dogWins}`);
+                $('.modal, .overlay').addClass('active');
             }
 
         } else {
@@ -43,22 +43,35 @@ $(document).ready(function() {
             rules.winCheck(sign);
 
             if (rules.winCheck(sign)) {
-                console.log('Cat wins!');
-                win = 1;
+                $('.modal h2').html('Yeah, cats are okay.');
+                rules.catWins += 1;
+                $('#cat-wins').html(`Cats: ${rules.catWins}`);
+                $('.modal, .overlay').addClass('active');
             }
         }
 
         numClicks++;
 
         if (rules.checkFull() !== true) {
-            console.log("It's a draw!");
+            $('.modal h2').html("It's a draw!");
+            rules.draws += 1;
+            $('#draws').html(`Draws: ${rules.draws}`);
+            $('.modal, .overlay').addClass('active');
         }
 
     });
+        
+    $('.new-game').on('click', function() {
 
-    const popup = function() {
+        rules.countBox = ['', '', '', '', '', '', '', '', ''];
+        rules.win = 0;
+        $('.box').each(function() {
+            $(this).attr('class', 'box');
+        });
+        $('.modal').attr('class', 'modal');
+        $('.overlay').attr('class', 'overlay');
 
-    }
+    });
 
 })
 

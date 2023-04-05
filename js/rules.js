@@ -8,16 +8,6 @@
 // check each turn whether winning rules have been met
 
 
-const addX = function() {
-    if (box !== "") {
-        return null
-    } else {
-        add 
-    }
-}
-
-
-
 const rules = {
 
     countBox: ['', '', '', '', '', '', '', '', ''],
@@ -63,5 +53,9 @@ const rules = {
         }
     },
 
-    win: 0
+    catWins: 0,
+
+    dogWins: 0,
+
+    draws: 0,
 }

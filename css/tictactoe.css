@@ -6,7 +6,7 @@ font-family: 'Nabla', cursive;
 */
 
 html {
-    background-color: #600082;
+    background-color: #d9fbff;
 }
 
 body {
@@ -78,17 +78,110 @@ div > div {
 }
 
 .box.x {
+    padding: 50px;
     background-image: url(../img/dog.jpeg);
-    background-size: auto 150px;
+    background-size: 90%;
+    /* background-size: contain; */
     background-repeat: no-repeat;
     background-position: center;
-    transition: 1s;
+    animation: dogScale 0.5s ease-in;
 }
 
 .box.o {
     background-image: url(../img/cat.jpeg);
-    background-size: auto 150px;
+    background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
-    transition: 1s all;
+    animation: catScale 0.5s ease-in;
+}
+
+@keyframes dogScale {
+    from {
+        background-size: 0;
+    }
+    to {
+        background-size: 90%;
+    }
+}
+
+@keyframes catScale {
+    from {
+        background-size: 0;
+    }
+    to {
+        background-size: 60%;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 500ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.8);
+    width: 500px;
+    max-width: 80%;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+    padding: 10px 15px;
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.new-game {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.3em;
+    outline: none;
+    background: #006e7b;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: whitesmoke;
+    margin: 20px 0;
+}
+
+.modal-body {
+    padding: 10px 15px;
+}
+
+.wins {
+    font-weight: bold;
+}
+
+#cat-wins, #dog-wins, #draws {
+    display: inline-block;
+    width: 100px;
+}
+
+.overlay {
+    opacity: 0;
+    position: fixed;
+    max-width: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+.overlay.active {
+    opacity: 1;
 }
