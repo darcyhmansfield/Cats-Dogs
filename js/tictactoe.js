@@ -10,11 +10,15 @@ $(document).ready(function() {
 
     $('.box').on('click', function() {
 
+        // A few checks to see if anything should be added to the box
+
         if (rules.win !== 0) {return};
 
         const chosenBox = + $(this).attr('id').slice(3);
 
         if (rules.checkBox(chosenBox)) {return};
+
+        // Dog's turn if numClicks is an even number
 
         if (numClicks % 2 === 0) {
 
@@ -23,6 +27,7 @@ $(document).ready(function() {
             const sign = 'x';
             rules.addNum(sign, chosenBox);
             rules.winCheck(sign);
+            $('.turn').html("Cat's turn!");
 
             if (rules.winCheck(sign)) {
                 $('.modal h2').html('Dogs rule!');
@@ -32,6 +37,8 @@ $(document).ready(function() {
                 rules.win = 1;
             }
 
+        // Cat's turn if numClicks is an odd number
+
         } else {
 
             catMeow.play();
@@ -39,6 +46,9 @@ $(document).ready(function() {
             const sign = 'o'
             rules.addNum(sign, chosenBox);
             rules.winCheck(sign);
+            $('.turn').html("Dog's turn!");
+
+            // If winCheck is true, changes modal class to active and unhides modal
 
             if (rules.winCheck(sign)) {
                 $('.modal h2').html('Yeah, cats are okay.');
@@ -51,6 +61,8 @@ $(document).ready(function() {
 
         numClicks++;
 
+        // If no wins have occured and the grid is full, then it's a draw
+
         if (rules.checkFull() !== true) {
             $('.modal h2').html("It's a draw!");
             rules.draws += 1;
@@ -59,6 +71,8 @@ $(document).ready(function() {
         }
 
     });
+
+    // Rules for modal button to start a new game, basically clears and reverts all variables to their original values
         
     $('.new-game').on('click', function() {
 
@@ -69,6 +83,7 @@ $(document).ready(function() {
         });
         $('.modal').attr('class', 'modal');
         $('.overlay').attr('class', 'overlay');
+        $('.turn').html("Dog's turn!");
         numClicks = 0;
 
     });
