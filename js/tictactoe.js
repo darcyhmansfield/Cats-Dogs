@@ -1,21 +1,16 @@
 
 
-// define grid
-// make each grid box a button
-// when clicked, box will add character
-// if box already taken, nothing happens
-// switch turns
-// store each pick into an object
-// check each turn whether winning rules have been met
-
 $(document).ready(function() {
-    console.log('ready!');
+
+    const dogBark = new Audio('../img/dog-bark.m4a');
+
+    const catMeow = new Audio('../img/cat-meow.m4a');
 
     let numClicks = 0;
 
     $('.box').on('click', function() {
 
-        // if (rules.win === 1) {return}
+        if (rules.win !== 0) {return};
 
         const chosenBox = + $(this).attr('id').slice(3);
 
@@ -23,6 +18,7 @@ $(document).ready(function() {
 
         if (numClicks % 2 === 0) {
 
+            dogBark.play();
             $(this).addClass('x');
             const sign = 'x';
             rules.addNum(sign, chosenBox);
@@ -33,10 +29,12 @@ $(document).ready(function() {
                 rules.dogWins += 1;
                 $('#dog-wins').html(`Dogs: ${rules.dogWins}`);
                 $('.modal, .overlay').addClass('active');
+                rules.win = 1;
             }
 
         } else {
 
+            catMeow.play();
             $(this).addClass('o');
             const sign = 'o'
             rules.addNum(sign, chosenBox);
@@ -47,6 +45,7 @@ $(document).ready(function() {
                 rules.catWins += 1;
                 $('#cat-wins').html(`Cats: ${rules.catWins}`);
                 $('.modal, .overlay').addClass('active');
+                rules.win = 1;
             }
         }
 
@@ -70,11 +69,9 @@ $(document).ready(function() {
         });
         $('.modal').attr('class', 'modal');
         $('.overlay').attr('class', 'overlay');
+        numClicks = 0;
 
     });
 
 })
 
-// add classes (x or o using images)OR
-// event.target
-// have the grid be an array, event.target will add an x or o

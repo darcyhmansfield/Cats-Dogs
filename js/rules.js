@@ -53,6 +53,8 @@ const rules = {
         }
     },
 
+    win: 0,
+
     catWins: 0,
 
     dogWins: 0,
