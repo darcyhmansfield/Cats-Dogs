@@ -1,8 +1,8 @@
-
+ 
 
 const aiGo = {
 
-    // Check which box wasa chosen first
+    // Check which box was chosen first
 
     checkFirst: function() {
 
@@ -20,11 +20,11 @@ const aiGo = {
 
     edgeCorner: [0, 2, 6, 8],
 
-    center: 0,
+    center: 4,
 
     // Check if there are any winArrays with only 1 empty space
 
-    self2Box: function(sign) {
+    check2Box: function(sign) {
 
         for (x=0; x<rules.winArray.length; x++) {
 
@@ -34,27 +34,35 @@ const aiGo = {
             let empty = '';
 
             for (i=0; i<3; i++) {
+
+                const letter = rules.countBox[rules.winArray[x][i]];
                 
-                if (rules.countBox[rules.winArray[x][i]] === 'x') {
+                if ( letter === 'x' ) {countX++}
+                else if (letter === 'o') {countO++}
+                else {
+                    countEmpty++;
+                    empty = i;
+                };
 
-                    countX += 1;
-                    countEmpty += 1;
+            }
 
-                } else if (rules.countBox[rules.winArray[x][i]] === 'o') {
+            if (countEmpty === 1) {
 
-                    countO += 1;
-                    countEmpty += 1;
+                const boxNum = rules.winArray[x][empty];
+
+                if (countO === 2 && sign === 'o') {
+                    
+                    return ['o', boxNum];
+
+                } else if (countX === 2 && sign === 'x') {
+
+                    return ['x', boxNum];
 
                 } else {
 
-                    const selfEmpty = rules.winArray[x][i];
+                    return ['', boxNum];
 
-                }
-            }
-
-            if (count === 2) {
-                
-                return selfEmpty;
+                };
 
             };
 

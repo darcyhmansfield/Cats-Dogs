@@ -1,5 +1,5 @@
 
-
+ 
 $(document).ready(function() {
 
     const dogBark = new Audio('../img/dog-bark.m4a');
@@ -35,6 +35,65 @@ $(document).ready(function() {
                 $('#dog-wins').html(`Dogs: ${rules.dogWins}`);
                 $('.modal, .overlay').addClass('active');
                 rules.win = 1;
+            }
+
+            // If the single player checkbox is checked, the AI will go next
+
+            if ($('#sp').is(':checked')) {
+
+                // if first go is not in middle, then go middle (box 4), otherwise go to box 0
+
+                if (numClicks === 0) {
+
+                    const first = aiGo.checkFirst();
+
+                    if (first === aiGo.center) {
+
+                        const timeClass = function() {$('#box0').addClass('o')};
+                        setTimeout(timeClass, 1000);
+                        const sign = 'o';
+                        rules.addNum(sign, 0);
+
+                    } else {
+
+                        const timeClass = function() {$('#box4').addClass('o')};
+                        setTimeout(timeClass, 1000);
+                        const sign = 'o';
+                        rules.addNum(sign, 4);
+
+                    }
+
+                // check if there are any rows with two signs
+
+                } else {
+
+                    const winO = aiGo.check2Box('o');
+                    const winX = aiGo.check2Box('x');
+
+                    if (winO[0] === 'o') {
+
+                        const winBox = '#box' + winO;
+                        const timeClass = function() {$(winBox).addClass('o')};
+                        setTimeout(timeClass, 1000);
+                        const sign = 'o';
+                        rules.addNum(sign, winBox);
+
+                    } else if (winX[0] === 'x') {
+
+                        const winBox = '#box' + winX;
+                        const timeClass = function() {$(winBox).addClass('o')};
+                        setTimeout(timeClass, 1000);
+                        const sign = 'o';
+                        rules.addNum(sign, winBox);
+
+                    }
+
+
+                }
+
+                numClicks += 2;
+                return
+
             }
 
         // Cat's turn if numClicks is an odd number
